@@ -1,5 +1,5 @@
 angular.module('roadtrippin.maps', ['gservice'])
-  .controller('mapController', function($scope, mapFactory, gservice, $location, $anchorScroll) {
+  .controller('mapController', function($scope, mapFactory, gservice, $location, $anchorScroll, $http) {
     $scope.route = {};
     $scope.route.stopOptions = [1, 2, 3, 4, 5];
     $scope.places = [];
@@ -9,12 +9,10 @@ angular.module('roadtrippin.maps', ['gservice'])
       document.getElementById('start'), {
       types: ['geocode']
     });
-    
+
     startAutoComplete.addListener('place_changed', function() {
       $scope.route.start = startAutoComplete.getPlace().formatted_address;
         var place = startAutoComplete.getPlace();
-        console.log('place', place);   
-        console.log($scope.route.start); 
     });
 
     var endAutoComplete = new google.maps.places.Autocomplete(
@@ -24,7 +22,7 @@ angular.module('roadtrippin.maps', ['gservice'])
 
     endAutoComplete.addListener('place_changed', function() {
       $scope.route.end = endAutoComplete.getPlace().formatted_address;
-      $(this).val('') ;   
+      $(this).val('') ;
     });
 
     //this is a call to our Google maps API factory for directions
@@ -97,6 +95,19 @@ angular.module('roadtrippin.maps', ['gservice'])
     };
 
     $scope.getAll();
+
+    $scope.getYelp = function (place) {
+      console.log(place)
+      $http({
+        method: 'POST',
+        url: '/api/yelp',
+        data: place,
+        dataType: "json"
+
+      }).then(function (res) {
+        console.log(res.status);
+      })
+    };
 
     $scope.signout = function () {
       mapFactory.signout();
