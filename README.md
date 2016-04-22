@@ -24,6 +24,7 @@
 - Node
 - Express
 - Angular
+- Ionic
 
 ## Requirements
 
@@ -45,9 +46,9 @@ View the project roadmap [here](https://github.com/ZeusCrew/ZeusCrew/issues)
 
 ## Team
 
-  - __Product Owner__: Amanda Pattridge
-  - __Scrum Master__: Andrew Vedady
-  - __Development Team Members__: Hiroshi Matsuda, Sara Gee, Frances Swiecki 
+  - __Product Owners__: Nick Vinson, Amanda Patridge
+  - __Scrum Masters__: Jonathan Huang, Andrew Vedady
+  - __Software Engineers__: Mher Khanonyan, Artjom Svjatickis, Hiroshi Matsuda, Sara Gee, Frances Swiecki
 
 ## Contributing
 
