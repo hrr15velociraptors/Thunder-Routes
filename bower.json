@@ -1,21 +1,22 @@
 {
-  "name": "roadtrippin",
+  "name": "Thunderroutes",
   "description": "Find the best routes and attractions",
-  "main": "index.js",
-  "authors": [
-    "Zeus Crew"
-  ],
-  "license": "ISC",
-  "homepage": "https://github.com/ZeusCrew/ZeusCrew.git",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.2.4"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.3.16"
+  },
+  "homepage": "https://github.com/hrr15velociraptors/Thunderroutes",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+  "node_modules",
+  "bower_components",
+  "bower_components"
   ],
-  "dependencies":{
-    "angular": "~1.3.16",
-    "angular-route": "~1.3.16"
+  "dependencies": {
+  "angular": "~1.3.16",
+  "angular-route": "~1.3.16"
   }
 }

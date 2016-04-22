@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/hrr15velociraptors/ZeusCrew.svg?label=ready&title=Ready)](http://waffle.io/hrr15velociraptors/ZeusCrew)
 # Thunder Routes
 
 > For lightning-fast road trip decisions
@@ -23,6 +24,7 @@
 - Node
 - Express
 - Angular
+- Ionic
 
 ## Requirements
 
@@ -44,9 +46,9 @@ View the project roadmap [here](https://github.com/ZeusCrew/ZeusCrew/issues)
 
 ## Team
 
-  - __Product Owner__: Amanda Pattridge
-  - __Scrum Master__: Andrew Vedady
-  - __Development Team Members__: Hiroshi Matsuda, Sara Gee, Frances Swiecki 
+  - __Product Owner__: Nick Vinson
+  - __Scrum Master__: Jonathan Huang
+  - __Software Engineers__: Mher Khanonyan, Artjom Svjatickis
 
 ## Contributing
 
