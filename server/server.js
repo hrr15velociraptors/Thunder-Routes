@@ -4,10 +4,11 @@ var mongoose = require('mongoose');
 var parser = require('body-parser');
 var userController = require('./users/userController.js');
 var journeyController = require('./journey/journeyController.js');
+var yelp = require('./utils/yelp');
 
 var app = express();
 
-app.use(express.static(__dirname + '/../client'));
+app.use(express.static(__dirname + '/../client/webapp'));
 app.use(parser.json());
 app.use(morgan('dev'));
 
@@ -20,8 +21,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('Mongoose is connected');
 });
-  
 
+app.post('/api/yelp', yelp.getDestData);
 app.post('/saveJourney', journeyController.saveJourney);
 app.get('/saveJourney', journeyController.getAll);
 app.post('/signin', userController.signin);
