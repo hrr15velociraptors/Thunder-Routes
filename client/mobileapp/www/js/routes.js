@@ -1,4 +1,4 @@
-angular.module('app.routes', ['ionicUIRouter'])
+angular.module('app.routes', [])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -10,51 +10,22 @@ angular.module('app.routes', ['ionicUIRouter'])
     
   
 
-      .state('tabsController.addRoute', {
+      .state('addRoute', {
     url: '/page2',
-    views: {
-      'tab1': {
-        templateUrl: 'templates/addRoute.html',
-        controller: 'addRouteCtrl'
-      }
-    }
+    templateUrl: 'templates/addRoute.html',
+    controller: 'addRouteCtrl'
   })
 
-  /* 
-    The IonicUIRouter.js UI-Router Modification is being used for this route.
-    To navigate to this route, do NOT use a URL. Instead use one of the following:
-      1) Using the ui-sref HTML attribute:
-        ui-sref='tabsController.map'
-      2) Using $state.go programatically:
-        $state.go('tabsController.map');
-    This allows your app to figure out which Tab to open this page in on the fly.
-    If you're setting a Tabs default page or modifying the .otherwise for your app and
-    must use a URL, use one of the following:
-      /page1/tab1/page3
-      /page1/tab2/page3
-  */
-  .state('tabsController.map', {
+  .state('map', {
     url: '/page3',
-    views: {
-      'tab1': {
-        templateUrl: 'templates/map.html',
-        controller: 'mapCtrl'
-      },
-      'tab2': {
-        templateUrl: 'templates/map.html',
-        controller: 'mapCtrl'
-      }
-    }
+    templateUrl: 'templates/map.html',
+    controller: 'mapCtrl'
   })
 
-  .state('tabsController.allRoutes', {
+  .state('allRoutes', {
     url: '/page4',
-    views: {
-      'tab3': {
-        templateUrl: 'templates/allRoutes.html',
-        controller: 'allRoutesCtrl'
-      }
-    }
+    templateUrl: 'templates/allRoutes.html',
+    controller: 'allRoutesCtrl'
   })
 
   .state('tabsController', {
@@ -75,7 +46,7 @@ angular.module('app.routes', ['ionicUIRouter'])
     controller: 'loginCtrl'
   })
 
-$urlRouterProvider.otherwise('/page1/page4')
+$urlRouterProvider.otherwise('/page6')
 
   
 
