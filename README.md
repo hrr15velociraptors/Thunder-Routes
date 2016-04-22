@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/hrr15velociraptors/ZeusCrew.png?label=ready&title=Ready)](https://waffle.io/hrr15velociraptors/ZeusCrew)
 # Thunder Routes
 
 > For lightning-fast road trip decisions
