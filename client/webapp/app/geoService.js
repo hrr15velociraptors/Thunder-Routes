@@ -140,9 +140,14 @@ angular.module('gservice', [])
           var placesService = new google.maps.places.PlacesService(document.getElementById('invisible'), placeRequests[i].location);
           placesService.textSearch(placeRequests[i], function (res, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
+              var dest = res[0];
               var place = {
-                location: res[0].formatted_address,
-                name: res[0].name
+                location: dest.formatted_address,
+                name: dest.name,
+                lat: dest.geometry.location.lat(),
+                lng: dest.geometry.location.lng(),
+                price_level: dest.price_level,
+                rating: dest.rating
               };
               placesToStop.push(place);
               doneSoFar++;
