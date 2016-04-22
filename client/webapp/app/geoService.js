@@ -57,6 +57,7 @@ angular.module('gservice', [])
             var waypoints = getWaypoints(result.routes[0].overview_path, numStops);
             var promise = getNearbyThings(waypoints); //testing testing
             promise.then(function (placePoints) {
+              // var placePoints = placePoints.map(function (pl) {return pl[0]});
               googleMapService.render(officialStart, officialEnd, placePoints)
               .then(function () {
                 deferred.resolve(googleMapService.thisTrip.waypoints);
@@ -77,7 +78,7 @@ angular.module('gservice', [])
         var stops = []; //format stops for Google request
         waypoints.forEach(function (w) {
           stops.push({
-            location: w.location,
+            location: w[0].location,
             stopover: true
           });
         });
@@ -140,16 +141,21 @@ angular.module('gservice', [])
           var placesService = new google.maps.places.PlacesService(document.getElementById('invisible'), placeRequests[i].location);
           placesService.textSearch(placeRequests[i], function (res, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
-              var dest = res[0];
-              var place = {
-                location: dest.formatted_address,
-                name: dest.name,
-                lat: dest.geometry.location.lat(),
-                lng: dest.geometry.location.lng(),
-                price_level: dest.price_level,
-                rating: dest.rating
-              };
-              placesToStop.push(place);
+              var places = [];
+              //grab first 4 destinations
+              for (var i = 0; i < 5; i++) {
+                var dest = res[i];
+                var place = {
+                  location: dest.formatted_address,
+                  name: dest.name,
+                  lat: dest.geometry.location.lat(),
+                  lng: dest.geometry.location.lng(),
+                  price_level: dest.price_level,
+                  rating: dest.rating
+                };
+                places.push(place);
+              }
+              placesToStop.push(places);
               doneSoFar++;
               if (doneSoFar === placeRequests.length) {
                 deferred.resolve(placesToStop);
@@ -165,9 +171,11 @@ angular.module('gservice', [])
       //Record order in 'position' property of each waypoint
       var sortWaypoints = function (waypointOrder) {
         for (var i = 0; i < googleMapService.thisTrip.waypoints.length; i++) {
-          var waypoint = googleMapService.thisTrip.waypoints[i];
-          var position = waypointOrder[i];
-          waypoint.position = position;
+          var waypointChoices = googleMapService.thisTrip.waypoints[i];
+          for (var j = 0; j < 5; j++) {
+            var position = waypointOrder[i];
+            waypointChoices[j].position = position;
+          }
         }
         return;
       };
