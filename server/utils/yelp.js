@@ -7,8 +7,18 @@ var yelp = new Yelp({
   token_secret: process.env.TOKEN_SECRET,
 });
 
-module.exports.getDestData = function (destName, destLoc) {
-  //yelp.search({name: destName})
+module.exports.getDestData = function (req, res) {
+  // See http://www.yelp.com/developers/documentation/v2/search_api
+  //Searching using name of stop and latitude/longitude
+  var ll = req.body.lat + ',' + req.body.lng;
+  yelp.search({term: req.body.name, ll: ll, limit: 5})
+  .then(function (data) {
+    console.log(data);
+    res.json(data);
+  })
+  .catch(function (err) {
+    console.error(err);
+    res.status(500).send('failed');
+  });
 }
-
 
