@@ -1,0 +1,26 @@
+{
+  "name": "roadtrippin",
+  "version": "1.0.0",
+  "description": "Find the best routes and attractions",
+  "main": "server/server.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anatomij/Thunderroutes.git"
+  },
+  "author": "Velociraptors",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.0",
+    "crypto": "0.0.3",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "grunt": "^1.0.1",
+    "jwt-simple": "^0.5.0",
+    "mongoose": "^4.4.11",
+    "morgan": "^1.7.0",
+    "q": "^1.4.1",
+    "request": "^2.71.0"
+  }
+}

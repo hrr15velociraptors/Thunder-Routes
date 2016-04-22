@@ -1,0 +1,181 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", Arial, Helvetica;
+}
+
+#funcNav {
+  background-color: #003136;
+  width: 100%;
+  max-width: 100%;
+  height: 120px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+
+h1 {
+  text-align: center;
+  font: 3em "Fugaz One";
+  color: white;
+  position: relative;
+  bottom: 25%;
+}
+
+.title {
+  width: 100%;
+}
+
+.initial-form {
+  margin-bottom: 10px;
+}
+
+.account-signup {
+  float: right;
+}
+
+.account-signin {
+  float: right;
+}
+
+.dropdown-toggle {
+  background: rgba(0,0,0,0);
+  color: white;
+  outline: none;
+  border: none;
+  margin-top: 15px;
+  position: relative;
+  left: 50%;
+  display: block;
+}
+
+.acct,
+.caret {
+  font-family: Helvetica;
+  font-weight: 200;
+  color: white;
+}
+
+.dropdown-menu {
+  color: black;
+}
+
+.dropdown-menu>li>a:hover {
+  text-decoration: none;
+  color: #F2932E;
+}
+
+.spacer {
+  height: 120px;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+form {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+form * {
+  margin-right: 10px;
+}
+
+.btn a {
+  color: #333;
+}
+
+.btn a:hover {
+  text-decoration: none;
+  color: #333;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: #F2932E;
+}
+
+.form-control {
+  height: 40px;
+}
+
+.container {
+  padding: 15px 0;
+}
+
+.row{
+  margin: 0 15px 25px;
+}
+
+#map {
+  height: 415px;
+}
+
+.pac-container:after {
+  background-image: none !important;
+  height: 0px;
+}
+
+i {
+  padding: 0 10px;
+}
+
+h3 {
+ font: 1.5em "Fugaz One";
+ color: #FFF;
+ padding: 10px 0;
+ background-color: #003136;
+}
+
+.savedRoutes {
+  float: none;
+  margin: 0 auto;
+}
+
+.saved-routes {
+  margin-bottom: 0;
+  position: relative;
+  top: 50%;
+}
+
+.infoHeader {
+  margin-top: 0;
+}
+
+.info-content {
+  overflow-y: scroll;
+}
+
+.info {
+  padding: 25px 0;
+  margin: 0;
+  text-align: center;
+  border-bottom: 2px groove #d5d8d3;
+}
+
+.info:last-of-type {
+  border-bottom: none;
+}
+
+.stop-name {
+  font-size: 1.3em;
+}
+
+.stop-address {
+  margin: 0;
+}
+
+.route-start, 
+.route-end {
+  text-align: left;
+  margin-bottom: 0
+}
+
+.saved-route-link {
+  float: right;
+}
+
+.dont-show {
+  visibility: hidden;
+}
