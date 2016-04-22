@@ -28,7 +28,11 @@ angular.module('roadtrippin.maps', ['gservice'])
     //this is a call to our Google maps API factory for directions
     $scope.getRoute = function() {
       gservice.calcRoute($scope.route.start, $scope.route.end, $scope.route.numStops)
-        .then(function(places) { splitLocations(places); });
+        .then(function(places) {
+          //first 5 choices at every wp
+          $scope.allPlaces = places;
+          splitLocations(places);
+        });
         $scope.startInput = '';
         $scope.endInput = '';
     };
@@ -41,7 +45,10 @@ angular.module('roadtrippin.maps', ['gservice'])
         //this apparently is needed for a clean copy...
         placesCopy.push(JSON.parse(JSON.stringify(places[i])));
       }
-      placesCopy.forEach(function (place) { //split address for easier formatting
+      placesCopy.forEach(function (nearPlaces) { //split address for easier formatting
+        //first choice
+        console.log(nearPlaces);
+        place = nearPlaces[0];
         place.location = place.location.split(', ');
         $scope.places.push(place);
       });
