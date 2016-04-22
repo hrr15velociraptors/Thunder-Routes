@@ -6,3 +6,8 @@ client/lib
 
 *.floo
 *.flooignore
+
+# ionic
+client/mobileapp/node_modules/
+client/mobileapp/platforms/
+client/mobileapp/plugins/
