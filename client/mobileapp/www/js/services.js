@@ -182,7 +182,7 @@ angular.module('app.services', [])
      var deferred = $q.defer ();
      $http({
        method: 'POST',
-       url: '/saveJourney',
+       url: 'http://localhost:5000/saveJourney',
        data: JSON.stringify(tripObject)
      }).then(function (res) {
        deferred.resolve (res);
@@ -196,7 +196,7 @@ angular.module('app.services', [])
      var deferred = $q.defer();
      $http({
        method: 'GET',
-       url: '/saveJourney'
+       url: 'http://localhost:5000/saveJourney'
      }).then(function (res) {
        deferred.resolve (res.data);
      }).catch(function (err) {

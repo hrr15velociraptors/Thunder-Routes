@@ -14,6 +14,15 @@
                 <select ng-model ="route.numStops" ng-options="n for n in route.stopOptions"></select>
             </label>
         </form>
-        <a ui-sref="map" id="addRoute-button13" class="button button-balanced button-large button-block" ng-click="getRoute()">Get Route</a>
+        <a id="addRoute-button13" class="button button-balanced button-large button-block" ng-click="getRoute()">Get Route</a>
+        
+        <!-- Pitstops for new route -->
+        <ion-list ng-if="places.length" class="info stop-info" ng-repeat="place in places | orderBy:'position'">
+            <!-- <ion-item>Route A</ion-item> -->
+            <ion-item class="stop-name">{{getLetter(place.position)}}. {{place.name}}</ion-item>
+            <ion-item class="stop-address">{{place.location[0]}}</ion-item>
+            <ion-item class="stop-address">{{place.location[1]}}, {{place.location[2]}}</ion-item>
+            <!-- <ion-item class="stop-address">{{place.location[3]}}</ion-item> -->
+        </ion-list>
     </ion-content>
 </ion-view>
