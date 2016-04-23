@@ -5,13 +5,13 @@ var parser = require('body-parser');
 var userController = require('./users/userController.js');
 var journeyController = require('./journey/journeyController.js');
 var yelp = require('./utils/yelp');
-
+var cors = require('cors');
 var app = express();
 
 app.use(express.static(__dirname + '/../client/webapp'));
 app.use(parser.json());
 app.use(morgan('dev'));
-
+app.use(cors());
 
 var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/roadtrippin';
 mongoose.connect(mongoUri);

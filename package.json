@@ -13,6 +13,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
     "crypto": "0.0.3",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
