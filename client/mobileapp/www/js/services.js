@@ -27,11 +27,11 @@ angular.module('app.services', [])
           };
           //Appends the map to the view
           map = new google.maps.Map(document.getElementById('map'), mapOptions);
+          directionsDisplay.setMap(map);
           }, function(error){
           console.log("Could not get location");
         });
 
-        directionsDisplay.setMap(map);
       };
 
       // Refresh, to re-initialize the map.
@@ -94,6 +94,7 @@ angular.module('app.services', [])
           optimizeWaypoints: true,
           travelMode: google.maps.TravelMode.DRIVING
         };
+        // Puts the points on the google map
         directionsService.route(wyptRequest, function (response, status) {
           if (status === google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);

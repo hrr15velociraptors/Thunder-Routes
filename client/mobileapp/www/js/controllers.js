@@ -18,9 +18,6 @@ angular.module('app.controllers', ['app.services'])
     startAutoComplete.addListener('place_changed', function() {
       $scope.route.start = startAutoComplete.getPlace().formatted_address;
         var place = startAutoComplete.getPlace();
-        console.log('place', place);
-        console.log($scope.route.start);
-        console.log($scope.route.end);
     });
 
     var endAutoComplete = new google.maps.places.Autocomplete(
