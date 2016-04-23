@@ -45,11 +45,11 @@
       <p class="stop-address">{{place.location[1]}}, {{place.location[2]}}</p>
       <p class="stop-address">{{place.location[3]}}</p>
       <div ng-show='places[$index].showYelp'>
-        <p>{{ place.yelpData.name }}</p>
-        <p>yelp info here</p>
-        <p>yelp info here</p>
-        <p>yelp info here</p>
-        <p>yelp info here</p>
+        <p><img ng-src="{{place.yelpData.image_url}}">{{ place.yelpData.name }}</p>
+        <p><img ng-src="{{place.yelpData.rating_img_url_small}}"></p>
+        <p>Phone: {{place.yelpData.phone}}</p>
+        <p>{{place.yelpData.snippet_text}}</p>
+        <p>{{place.yelpData.url}}</p>
       </div>
     </div>
     <button class="routeBtn btn btn-block" ng-click="saveRoute()">Save this route</button>
