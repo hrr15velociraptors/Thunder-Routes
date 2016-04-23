@@ -45,9 +45,12 @@ angular.module('roadtrippin.maps', ['gservice'])
         //this apparently is needed for a clean copy...
         placesCopy.push(JSON.parse(JSON.stringify(places[i])));
       }
+      placesCopy.sort(function (a, b) {
+        a[0].position > b[0].position ? 1 : -1;
+      });
+
       placesCopy.forEach(function (nearPlaces) { //split address for easier formatting
         //first choice
-        console.log(nearPlaces);
         place = nearPlaces[0];
         place.location = place.location.split(', ');
         $scope.places.push(place);
@@ -104,16 +107,15 @@ angular.module('roadtrippin.maps', ['gservice'])
     $scope.getAll();
 
     $scope.getYelp = function (place) {
-      console.log(place)
       $http({
         method: 'POST',
         url: '/api/yelp',
         data: place,
         dataType: "json"
-
       }).then(function (res) {
-        console.log(res.status);
-      })
+        console.log(res.data);
+        $scope.places[place.position].yelpData = res.data;
+      });
     };
 
     $scope.signout = function () {
