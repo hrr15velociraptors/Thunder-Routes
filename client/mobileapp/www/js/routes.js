@@ -10,34 +10,22 @@ angular.module('app.routes', [])
     
   
 
-      .state('tabsController.routes', {
+      .state('addRoute', {
     url: '/page2',
-    views: {
-      'tab1': {
-        templateUrl: 'templates/routes.html',
-        controller: 'routesCtrl'
-      }
-    }
+    templateUrl: 'templates/addRoute.html',
+    controller: 'addRouteCtrl'
   })
 
-  .state('tabsController.routeMapView', {
+  .state('map', {
     url: '/page3',
-    views: {
-      'tab2': {
-        templateUrl: 'templates/routeMapView.html',
-        controller: 'routeMapViewCtrl'
-      }
-    }
+    templateUrl: 'templates/map.html',
+    controller: 'mapCtrl'
   })
 
-  .state('tabsController.aPISTUFF', {
+  .state('allRoutes', {
     url: '/page4',
-    views: {
-      'tab3': {
-        templateUrl: 'templates/aPISTUFF.html',
-        controller: 'aPISTUFFCtrl'
-      }
-    }
+    templateUrl: 'templates/allRoutes.html',
+    controller: 'allRoutesCtrl'
   })
 
   .state('tabsController', {
@@ -46,7 +34,19 @@ angular.module('app.routes', [])
     abstract:true
   })
 
-$urlRouterProvider.otherwise('/page1/page4')
+  .state('signup', {
+    url: '/page5',
+    templateUrl: 'templates/signup.html',
+    controller: 'signupCtrl'
+  })
+
+  .state('login', {
+    url: '/page6',
+    templateUrl: 'templates/login.html',
+    controller: 'loginCtrl'
+  })
+
+$urlRouterProvider.otherwise('/page6')
 
   
 

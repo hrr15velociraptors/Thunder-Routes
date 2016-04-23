@@ -54,7 +54,13 @@
             <ion-header-bar class="bar-stable">
                 <div class="title">Menu</div>
             </ion-header-bar>
-            <ion-content padding="false" class="side-menu-left has-header"></ion-content>
+            <ion-content padding="false" class="side-menu-left has-header">
+                <ion-list data-componentid="list5">
+                    <ion-item ui-sref="addRoute" menu-close="" data-componentid="list-item4">Add Route</ion-item>
+                    <ion-item ui-sref="map" menu-close="" data-componentid="list-item5">Map</ion-item>
+                    <ion-item ui-sref="allRoutes" menu-close="" data-componentid="list-item6">All Routes</ion-item>
+                </ion-list>
+            </ion-content>
         </ion-side-menu>
     </ion-side-menus>
 </div>
