@@ -7,11 +7,11 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-  
+
   .state('addRoute', {
     url: '/page2',
     templateUrl: 'templates/addRoute.html',
-    controller: 'addRouteCtrl'
+    controller: 'mapCtrl'
   })
 
   .state('map', {
@@ -23,7 +23,7 @@ angular.module('app.routes', [])
   .state('allRoutes', {
     url: '/page4',
     templateUrl: 'templates/allRoutes.html',
-    controller: 'allRoutesCtrl'
+    controller: 'mapCtrl'
   })
 
   .state('tabsController', {
@@ -46,6 +46,6 @@ angular.module('app.routes', [])
 
 $urlRouterProvider.otherwise('/page6')
 
-  
+
 
 });
