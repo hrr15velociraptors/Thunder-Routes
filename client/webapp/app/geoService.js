@@ -74,6 +74,7 @@ angular.module('gservice', [])
         //make route points accessable to other functions
         googleMapService.thisTrip.start = start;
         googleMapService.thisTrip.end = end;
+        googleMapService.thisTrip.waypointChoices = waypoints;
         googleMapService.thisTrip.waypoints = waypoints;
         var stops = []; //format stops for Google request
         waypoints.forEach(function (w) {

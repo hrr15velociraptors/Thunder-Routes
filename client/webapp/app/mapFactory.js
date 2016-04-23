@@ -4,6 +4,8 @@ angular.module('roadtrippin.mapsFactory', [])
 
     //send endpoints and array of waypoints to the server
     var saveJourneyWithWaypoints = function (tripObject) {
+      tripObject.waypoint = tripObject.waypoints.map(function (pt) {return pt[0]});
+      console.log(tripObject);
       var deferred = $q.defer ();
       $http({
         method: 'POST',
