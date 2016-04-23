@@ -11,13 +11,11 @@ module.exports.getDestData = function (req, res) {
   // See http://www.yelp.com/developers/documentation/v2/search_api
   //Searching using name of stop and latitude/longitude
   var ll = req.body.lat + ',' + req.body.lng;
-  yelp.search({term: req.body.name, ll: ll, limit: 5})
+  yelp.search({term: req.body.name, ll: ll, limit: 1})
   .then(function (data) {
-    console.log(data);
-    res.json(data);
+    res.json(data.businesses[0]);
   })
   .catch(function (err) {
-    console.error(err);
     res.status(500).send('failed');
   });
 }
