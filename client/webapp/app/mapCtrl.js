@@ -1,6 +1,9 @@
 angular.module('roadtrippin.maps', ['gservice'])
   .controller('mapController', function($scope, mapFactory, gservice, $location, $anchorScroll, $http) {
-    $scope.route = {};
+    $scope.route = {
+      start: '',
+      end: ''
+    };
     $scope.route.stopOptions = [1, 2, 3, 4, 5];
     $scope.places = [];
     $scope.savedRoutes = [];
@@ -45,10 +48,11 @@ angular.module('roadtrippin.maps', ['gservice'])
         //this apparently is needed for a clean copy...
         placesCopy.push(JSON.parse(JSON.stringify(places[i])));
       }
-      placesCopy.sort(function (a, b) {
-        a[0].position > b[0].position ? 1 : -1;
+      console.log(placesCopy);
+      placesCopy = placesCopy.sort(function (a, b) {
+        return a[0].position - b[0].position;
       });
-
+      console.log(placesCopy);
       placesCopy.forEach(function (nearPlaces) { //split address for easier formatting
         //first choice
         place = nearPlaces[0];
@@ -106,16 +110,18 @@ angular.module('roadtrippin.maps', ['gservice'])
 
     $scope.getAll();
 
-    $scope.getYelp = function (place) {
-      $http({
-        method: 'POST',
-        url: '/api/yelp',
-        data: place,
-        dataType: "json"
-      }).then(function (res) {
-        console.log(res.data);
-        $scope.places[place.position].yelpData = res.data;
-      });
+    $scope.getYelp = function (place, $index) {
+      if (!$scope.places[$index].yelpData) {
+        console.log('calling yelp');
+        $http({
+          method: 'POST',
+          url: '/api/yelp',
+          data: place,
+          dataType: "json"
+        }).then(function (res) {
+          $scope.places[$index].yelpData = res.data;
+        });
+      }
     };
 
     $scope.signout = function () {
