@@ -13,10 +13,10 @@ var JourneySchema = new mongoose.Schema({
     type: [{
       location: String,
       name: String,
-      lat: String,
-      lng: String,
-      price_level: String,
-      rating: String,
+      lat: Number,
+      lng: Number,
+      price_level: Number,
+      rating: Number,
       showYelp: Boolean,
       yelpData: {}
     }]
