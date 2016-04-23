@@ -64,15 +64,15 @@
   <h3 class="infoHeader"><i class="fa fa-caret-right fa-rotate-90" aria-hidden="true"></i>Saved Routes</h3>
   <div class="row info save-routes" ng-repeat="route in savedRoutes">
     <div class="col-xs-4">
-      <p class="route-start">From: {{ route.startPoint }}</p>
-      <p class="route-end">To: {{ route.endPoint }}</p>
+      <p class="route-start">From: {{ route.start }}</p>
+      <p class="route-end">To: {{ route.end }}</p>
     </div>
     <div class="col-xs-4">
       <!-- <div class="stop-count">Number of stops: <br /> {{ route.wayPoints.length/2 }}</div> -->
-      <div class="stop-count">{{route.wayPoints.length/2}} stop<span ng-if="route.wayPoints.length > 2">s</span></div>
+      <div class="stop-count">{{route.waypoints.length}} stop<span ng-if="route.waypoints.length > 2">s</span></div>
     </div>
     <div class="col-xs-4 centered">
-      <button class="saved-route-link btn" ng-click="viewSavedRoute(route.hash)">View this Route</button>
+      <button class="saved-route-link btn" ng-click="viewSavedRoute(route)">View this Route</button>
     </div>
   </div>
 </div>
