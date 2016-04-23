@@ -151,7 +151,9 @@ angular.module('gservice', [])
                   lat: dest.geometry.location.lat(),
                   lng: dest.geometry.location.lng(),
                   price_level: dest.price_level,
-                  rating: dest.rating
+                  rating: dest.rating,
+                  showYelp: false,
+                  yelpData: false
                 };
                 places.push(place);
               }

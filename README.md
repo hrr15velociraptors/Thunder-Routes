@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/hrr15velociraptors/ZeusCrew.png?label=ready&title=Ready)](https://waffle.io/hrr15velociraptors/ZeusCrew)
+[![Stories in Ready](https://badge.waffle.io/hrr15velociraptors/Thunder-Routes.svg?label=ready&title=Ready)](http://waffle.io/hrr15velociraptors/Thunder-Routes)
 # Thunder Routes
 
 > For lightning-fast road trip decisions
