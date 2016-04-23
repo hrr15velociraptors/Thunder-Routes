@@ -1,29 +1,36 @@
 angular.module('app.services', [])
 
-.factory('gservice', [function ($http, $q, mapFactory) {
+.factory('gservice', [function ($http, $q, mapFactory, $cordovaGeolocation) {
 
       var googleMapService = {};
-
-      // Set-up functions
-      // --------------------------------------------------------------
-
-      // Initialize the map
       var map, directionsDisplay;
       var directionsService = new google.maps.DirectionsService();
-
       //Store current trip data so we can access it for saving.
       //Properties will be added to this object every time a route is calculated.
       googleMapService.thisTrip = {};
+      //Hardware specific options for cordva as settings
+      var options = {timeout: 10000, enableHighAccuracy: true};
 
       //initialize the map if no other instructions are given
       var initialize = function () {
         directionsDisplay = new google.maps.DirectionsRenderer();
-        var SF = new google.maps.LatLng(37.7749, -122.4194);
-        var mapOptions = {
-          zoom: 7,
-          center: SF
-        };
-        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        //Calculates position of device via cordova geolocation service
+        $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+          //Creates Map based of geo position
+          var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+          var mapOptions = {
+            center: latLng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          //Appends the map to the view
+          map = new google.maps.Map(document.getElementById('map'), mapOptions);
+          }, function(error){
+          console.log("Could not get location");
+        });
+
         directionsDisplay.setMap(map);
       };
 
@@ -33,9 +40,7 @@ angular.module('app.services', [])
       };
 
       // Refresh the page upon window load.
-      google.maps.event.addDomListener(window, 'load',
-        googleMapService.refresh());
-
+      google.maps.event.addDomListener(window, 'load', googleMapService.refresh());
 
       // Navigation functions - Google directions service
       // --------------------------------------------------------------
