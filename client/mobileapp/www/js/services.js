@@ -1,6 +1,6 @@
 angular.module('app.services', [])
 
-.factory('gservice', [function ($http, $q, mapFactory, $cordovaGeolocation) {
+.factory('gservice', function ($http, $q, mapFactory, $cordovaGeolocation) {
 
       var googleMapService = {};
       var map, directionsDisplay;
@@ -174,8 +174,8 @@ angular.module('app.services', [])
       };
 
       return googleMapService;
-}])
-.factory('mapFactory', [function($http, $q, $window, $location) {
+})
+.factory('mapFactory', function($http, $q, $window, $location) {
 
    //send endpoints and array of waypoints to the server
    var saveJourneyWithWaypoints = function (tripObject) {
@@ -215,7 +215,7 @@ angular.module('app.services', [])
      getAllRoutes: getAllRoutes,
      signout: signout
    };
- }])
+ })
 .service('BlankService', [function(){
 
 }]);
