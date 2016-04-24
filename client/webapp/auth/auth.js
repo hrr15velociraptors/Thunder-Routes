@@ -4,7 +4,7 @@ angular.module('roadtrippin.auth', [])
   $scope.user = {};
   $scope.loginError = false;
   $scope.errorMessage = '';
-  
+
   $scope.signin = function(valid) {
     if (valid) {
       authFactory.signin($scope.user)
@@ -23,12 +23,12 @@ angular.module('roadtrippin.auth', [])
         });
     }
   };
-  
+
   $scope.signup = function(valid) {
     if (valid) {
       authFactory.signup($scope.user)
         .then(function (token) {
-          if (token && typeof token !== 'object') { 
+          if (token && typeof token !== 'object') {
             $scope.loginError = false;
             $window.localStorage.setItem('com.roadtrippin', token);
             $location.path('/');
