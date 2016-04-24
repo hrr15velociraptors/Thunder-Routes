@@ -142,23 +142,24 @@ angular.module('gservice', [])
           var placesService = new google.maps.places.PlacesService(document.getElementById('invisible'), placeRequests[i].location);
           placesService.textSearch(placeRequests[i], function (res, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
-              var places = [];
-              //grab first 4 destinations
-              for (var i = 0; i < 5; i++) {
-                var dest = res[i];
-                var place = {
-                  location: dest.formatted_address,
-                  name: dest.name,
-                  lat: dest.geometry.location.lat(),
-                  lng: dest.geometry.location.lng(),
-                  price_level: dest.price_level,
-                  rating: dest.rating,
-                  showYelp: false,
-                  yelpData: false
-                };
-                places.push(place);
-              }
-              placesToStop.push(places);
+              // grab first 20 destinations
+              // write algo that sorts choices top 5 choices according to desireability
+              // reassign places to sorted places
+              // for (var i = 0; i < 5; i++) {
+              //   var dest = res[i];
+              //   var place = {
+              //     location: dest.formatted_address,
+              //     name: dest.name,
+              //     lat: dest.geometry.location.lat(),
+              //     lng: dest.geometry.location.lng(),
+              //     price_level: dest.price_level,
+              //     rating: dest.rating,
+              //     showYelp: false,
+              //     yelpData: false
+              //   };
+              //   places.push(place);
+              // }
+              placesToStop.push(getTopChoices(res));
               doneSoFar++;
               if (doneSoFar === placeRequests.length) {
                 deferred.resolve(placesToStop);
@@ -169,6 +170,37 @@ angular.module('gservice', [])
           });
         }
         return deferred.promise;
+      };
+
+      var getTopChoices = function (choices) {
+        // sort locations by rating * price_level
+        // some fancy shit
+        choices = choices.map(function (choice) {
+          if (!choice.price_level || choice.price_level === undefined) {
+            choice.des = 0;
+          } if (choice.rating < 2 || choice.rating === undefined) {
+            choice.des = 0;
+          } else {
+            choice.des = choice.rating / choice.price_level;
+          }
+          var dest = {location: choice.formatted_address,
+            name: choice.name,
+            lat: choice.geometry.location.lat(),
+            lng: choice.geometry.location.lng(),
+            price_level: choice.price_level,
+            rating: choice.rating,
+            des: choice.des,
+            showYelp: false,
+            yelpData: fal se
+          };
+          return dest;
+        });
+
+        choices = choices.sort(function (a, b) {
+          return b.des - a.des;
+        });
+
+        return choices.slice(0, 5);
       };
 
       //Record order in 'position' property of each waypoint
