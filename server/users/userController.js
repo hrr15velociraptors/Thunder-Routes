@@ -9,7 +9,7 @@ module.exports = {
   signin: function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    
+
     findUser({username: username})
       .then(function(user) {
         if (!user) {
@@ -30,11 +30,11 @@ module.exports = {
         next(error);
       });
   },
-  
+
   signup: function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    
+
     findUser({username: username})
       .then(function(user) {
         if (user) {
@@ -55,7 +55,7 @@ module.exports = {
         next(error);
       });
   },
-  
+
   checkAuth: function(req, res, next) {
     var token = req.headers['x-access-token'];
     if (!token) {
@@ -73,6 +73,17 @@ module.exports = {
         .fail(function(error) {
           next(error);
         });
+    }
+  },
+
+  addUserToReq: function (req, res, next) {
+    var token = req.headers['x-access-token'];
+    if (!token) {
+      req.user = null;
+      nex();
+    } else {
+      req.user = jwt.decode(token, 'route66');
+      next()
     }
   },
 
