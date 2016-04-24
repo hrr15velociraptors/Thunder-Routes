@@ -20,9 +20,7 @@
       <input id="start" type="text" class="form-control" autofocus placeholder="Enter start point" ng-model="startInput" />
       <label for="end">Destination: </label>
       <input id="end" type="text" class="form-control" placeholder="Enter end point" ng-model="endInput" />
-      <!-- <select class="form-control" ng-model ="selectedOption" ng-options="n for n in route.stopOptions" >
-      </select> -->
-      <select class="form-control selectpicker" ng-model ="route.numStops" ng-options="n for n in route.stopOptions">
+      <select ng-init="route.numStops=route.stopOptions[0]" class="form-control selectpicker" ng-model="route.numStops" ng-options="n for n in route.stopOptions">
       </select>
       <button id="search-btn" class="btn btn-default" ng-click="getRoute()">Get Stops
       </button>
@@ -45,6 +43,8 @@
         <p class="stop-address">{{place.location[0]}}</p>
         <p class="stop-address">{{place.location[1]}}, {{place.location[2]}}</p>
         <p class="stop-address">{{place.location[3]}}</p>
+        <p><span ng-show='!places[$index].showYelp' class="glyphicon glyphicon-resize-full"></span><span ng-show='places[$index].showYelp' class="glyphicon glyphicon-resize-small
+"></span></p>
       </div>
       <br>
       <div ng-show='places[$index].showYelp'>

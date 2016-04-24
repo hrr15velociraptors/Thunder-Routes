@@ -166,7 +166,7 @@ h3 {
   margin: 0;
 }
 
-.route-start, 
+.route-start,
 .route-end {
   text-align: left;
   margin-bottom: 0
@@ -179,3 +179,11 @@ h3 {
 .dont-show {
   visibility: hidden;
 }
+
+.glyphicon-resize-small, .glyphicon-resize-full
+{
+  top: 20px;
+  font-size: 1.8em;
+  text-align: right;
+}
+
