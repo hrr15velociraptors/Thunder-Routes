@@ -1,4 +1,4 @@
-angular.module('roadtrippin.maps', ['gservice'])
+angular.module('roadtrippin.maps', ['gservice', 'ui.bootstrap'])
   .controller('mapController', function($scope, mapFactory, gservice, $location, $anchorScroll, $http, $window) {
     $scope.route = {
       start: '',
@@ -46,9 +46,7 @@ angular.module('roadtrippin.maps', ['gservice'])
       places.forEach(function (nearPlaces) { //split address for easier formatting
         //first choice
         place = nearPlaces[0];
-        if (!Array.isArray(place.location)) {
-          place.location = place.location.split(', ');
-        }
+        place.split_location = place.location.split(', ');
         $scope.places.push(place);
       });
     };

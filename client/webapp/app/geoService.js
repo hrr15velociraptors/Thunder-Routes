@@ -78,7 +78,7 @@ angular.module('gservice', [])
         var stops = []; //format stops for Google request
         waypoints.forEach(function (w) {
           stops.push({
-            location: w[0].location.join(' '),
+            location: w[0].location,
             stopover: true
           });
         });
