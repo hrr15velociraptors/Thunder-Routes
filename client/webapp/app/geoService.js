@@ -74,12 +74,11 @@ angular.module('gservice', [])
         //make route points accessable to other functions
         googleMapService.thisTrip.start = start;
         googleMapService.thisTrip.end = end;
-        googleMapService.thisTrip.waypointChoices = waypoints;
         googleMapService.thisTrip.waypoints = waypoints;
         var stops = []; //format stops for Google request
         waypoints.forEach(function (w) {
           stops.push({
-            location: w[0].location,
+            location: w[0].location.join(' '),
             stopover: true
           });
         });
@@ -142,23 +141,6 @@ angular.module('gservice', [])
           var placesService = new google.maps.places.PlacesService(document.getElementById('invisible'), placeRequests[i].location);
           placesService.textSearch(placeRequests[i], function (res, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
-              // grab first 20 destinations
-              // write algo that sorts choices top 5 choices according to desireability
-              // reassign places to sorted places
-              // for (var i = 0; i < 5; i++) {
-              //   var dest = res[i];
-              //   var place = {
-              //     location: dest.formatted_address,
-              //     name: dest.name,
-              //     lat: dest.geometry.location.lat(),
-              //     lng: dest.geometry.location.lng(),
-              //     price_level: dest.price_level,
-              //     rating: dest.rating,
-              //     showYelp: false,
-              //     yelpData: false
-              //   };
-              //   places.push(place);
-              // }
               placesToStop.push(getTopChoices(res));
               doneSoFar++;
               if (doneSoFar === placeRequests.length) {
@@ -212,7 +194,9 @@ angular.module('gservice', [])
             waypointChoices[j].position = position;
           }
         }
-        return;
+        googleMapService.thisTrip.waypoints = googleMapService.thisTrip.waypoints.sort(function (a, b) {
+          return a[0].position - b[0].position;
+        });
       };
 
       return googleMapService;

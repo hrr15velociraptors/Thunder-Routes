@@ -42,19 +42,13 @@ angular.module('roadtrippin.maps', ['gservice'])
 
     var splitLocations = function (places) {
       $scope.places = [];
-      //copy the places array before we start splitting things so our original stays in-tact
-      var placesCopy = [];
-      for (var i = 0; i < places.length; i++) {
-        //this apparently is needed for a clean copy...
-        placesCopy.push(JSON.parse(JSON.stringify(places[i])));
-      }
-      placesCopy = placesCopy.sort(function (a, b) {
-        return a[0].position - b[0].position;
-      });
-      placesCopy.forEach(function (nearPlaces) { //split address for easier formatting
+
+      places.forEach(function (nearPlaces) { //split address for easier formatting
         //first choice
         place = nearPlaces[0];
-        place.location = place.location.split(', ');
+        if (!Array.isArray(place.location)) {
+          place.location = place.location.split(', ');
+        }
         $scope.places.push(place);
       });
     };
@@ -74,56 +68,26 @@ angular.module('roadtrippin.maps', ['gservice'])
     };
 
     $scope.generateLink = function (route) {
-      //http://google.com/maps/dir/los+angeles+ca/34.0108514,-118.16205460000003/irvine+ca
+
+      //looks through all lat and lng and makes a google maps link
       var waypointLinks = '';
-      for (var i = 0; i < route.waypointChoices.length; i++) {
-        waypointLinks += route.waypointChoices[i][0].lat + ',' + route.waypointChoices[i][0].lng + '/';
+      for (var i = 0; i < route.waypoints.length; i++) {
+        waypointLinks += route.waypoints[i][0].lat + ',' + route.waypoints[i][0].lng + '/';
       }
-      console.log(waypointLinks);
       var link = 'http://google.com/maps/dir/'
       + route.start.split(',')[0] + '/'
       + waypointLinks
       + route.end.split(',')[0];
-      console.log(route.start);
-      console.log(route.end);
-      console.log(route.waypointChoices);
-      console.log(link);
+      //open link in new window
       $window.open(link, '_blank');
+
     };
 
     $scope.viewSavedRoute = function (route) {
       $location.hash('top');
       $anchorScroll();
-      gservice.render(route.start, route.end, route.waypointChoices)
+      gservice.render(route.start, route.end, route.waypoints)
       .then(function (places) { splitLocations(places); });
-      // for (var i = 0; i < $scope.savedRoutes.length; i++) {
-      //   if ($scope.savedRoutes[i].hash === hash) {
-      //     //split up waypoints array into names ans locations. Even index ==== name, odd index === location
-      //     $scope.savedRoutes[i].stopLocations = [];
-      //     $scope.savedRoutes[i].stopNames = [];
-      //     for (var j = 0; j < $scope.savedRoutes[i].wayPoints.length; j++) {
-      //       if (j % 2 === 0) {
-      //         $scope.savedRoutes[i].stopNames.push($scope.savedRoutes[i].wayPoints[j]);
-      //       } else {
-      //         $scope.savedRoutes[i].stopLocations.push($scope.savedRoutes[i].wayPoints[j]);
-      //       }
-      //     }
-      //     //set $scope.places to saved stop data so stop data will display on page
-      //     var places = [];
-      //     for (var k = 0; k < $scope.savedRoutes[i].stopNames.length; k++) {
-      //       var location = $scope.savedRoutes[i].stopLocations[k];
-      //       var place = {
-      //         name: $scope.savedRoutes[i].stopNames[k],
-      //         location: location,
-      //         position: k
-      //       };
-      //       places.push(place);
-      //     }
-      //     //add stop locations to stops array, render stops to map
-      //     gservice.render($scope.savedRoutes[i].startPoint, $scope.savedRoutes[i].endPoint, places)
-      //     .then(function (places) { splitLocations(places); });
-      //   }
-      // }
     };
 
     $scope.getAll();
