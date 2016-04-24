@@ -4,6 +4,7 @@ angular.module('app.services', [])
 
       var googleMapService = {};
       var startOptions = {};
+      var marks = [];
       var map, directionsDisplay;
       var directionsService = new google.maps.DirectionsService();
       //Store current trip data so we can access it for saving.
@@ -72,8 +73,22 @@ angular.module('app.services', [])
               .then(function () {
                 deferred.resolve(googleMapService.thisTrip.waypoints);
               }).then(function() {
-                map.setZoom(15);
+                // re-center map at start of trip
+                map.setZoom(12);
                 map.setCenter({lat:startLat,lng:startLng});
+                
+                // TODO: FULL TRIP DISPLAY
+                // // define fresh bounds
+                // var bounds = new google.maps.LatLngBounds();
+                
+                // // grow bounds from waypoints
+                // for (var i = 0; i < marks.length; i++) {
+                //   bounds.extend({lat:marks[i].lat,lng:marks[i].lng});
+                // }
+                
+                // // adjust map view to show trip
+                // map.setCenter(bounds.getCenter());
+                // map.fitBounds(bounds);
               });
             });
           }
@@ -134,6 +149,7 @@ angular.module('app.services', [])
           };
           waypoints.push(waypoint);
         });
+        marks = waypoints;
         return waypoints;
       };
 
