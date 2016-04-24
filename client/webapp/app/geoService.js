@@ -163,7 +163,7 @@ angular.module('gservice', [])
           } if (choice.rating < 2 || choice.rating === undefined) {
             choice.des = 0;
           } else {
-            choice.des = choice.rating / choice.price_level;
+            choice.des = choice.rating * choice.price_level;
           }
           var dest = {location: choice.formatted_address,
             name: choice.name,

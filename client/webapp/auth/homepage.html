@@ -49,15 +49,17 @@
       <br>
       <div ng-show='places[$index].showYelp'>
         <uib-tabset active="active">
-          <uib-tab index="0" heading="Info">
+          <uib-tab class="infoTab" index="0" heading="Info">
             <p><img ng-src="{{place.yelpData.image_url}}">{{ place.yelpData.name }}</p>
             <p><img ng-src="{{place.yelpData.rating_img_url_small}}"></p>
             <p>Phone: {{place.yelpData.phone}}</p>
             <p>{{place.yelpData.snippet_text}}</p>
             <p><a ng-href="{{place.yelpData.url}}" target="_blank">Yelp Url</a></p>
           </uib-tab>
-          <uib-tab index="1" heading="Other Choices">
-            {{place}}
+          <uib-tab class="infoTab" index="1" heading="Other Choices">
+            <div ng-repeat="choice in allPlaces.waypoints[$index]">
+              {{choice.name}}
+            </div>
           </uib-tab>
         </uib-tabset>
       </div>

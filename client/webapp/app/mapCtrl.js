@@ -32,8 +32,6 @@ angular.module('roadtrippin.maps', ['gservice', 'ui.bootstrap'])
     $scope.getRoute = function() {
       gservice.calcRoute($scope.route.start, $scope.route.end, $scope.route.numStops)
         .then(function(places) {
-          //first 5 choices at every wp
-          $scope.allPlaces = places;
           splitLocations(places);
         });
         $scope.startInput = '';
@@ -42,7 +40,7 @@ angular.module('roadtrippin.maps', ['gservice', 'ui.bootstrap'])
 
     var splitLocations = function (places) {
       $scope.places = [];
-
+      $scope.allPlaces = gservice.thisTrip;
       places.forEach(function (nearPlaces) { //split address for easier formatting
         //first choice
         place = nearPlaces[0];
@@ -82,6 +80,7 @@ angular.module('roadtrippin.maps', ['gservice', 'ui.bootstrap'])
     };
 
     $scope.viewSavedRoute = function (route) {
+      $scope.allPlaces = route;
       $location.hash('top');
       $anchorScroll();
       gservice.render(route.start, route.end, route.waypoints)
