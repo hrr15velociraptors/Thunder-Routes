@@ -9,7 +9,6 @@ angular.module('app.controllers', ['app.services'])
     $scope.route.stopOptions = [1, 2, 3, 4, 5];
     $scope.places = [];
     $scope.savedRoutes = [];
-    console.log(google.maps.places);
     var startAutoComplete = new google.maps.places.Autocomplete(
       document.getElementById('start'), {
       types: ['geocode']

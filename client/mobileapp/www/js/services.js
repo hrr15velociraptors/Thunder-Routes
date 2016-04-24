@@ -3,6 +3,7 @@ angular.module('app.services', [])
 .factory('gservice', function ($http, $q, mapFactory, $cordovaGeolocation) {
 
       var googleMapService = {};
+      var startOptions = {};
       var map, directionsDisplay;
       var directionsService = new google.maps.DirectionsService();
       //Store current trip data so we can access it for saving.
@@ -14,16 +15,15 @@ angular.module('app.services', [])
       //initialize the map if no other instructions are given
       var initialize = function () {
         directionsDisplay = new google.maps.DirectionsRenderer();
-
         //Calculates position of device via cordova geolocation service
         $cordovaGeolocation.getCurrentPosition(options).then(function(position){
           //Creates Map based of geo position
           var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
           var mapOptions = {
-            center: latLng,
             zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            center: latLng,
+            preserveViewport: true
           };
           //Appends the map to the view
           map = new google.maps.Map(document.getElementById('map'), mapOptions);
