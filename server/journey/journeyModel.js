@@ -23,6 +23,9 @@ var JourneySchema = new mongoose.Schema({
   },
   hash: {
     type: String
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId
   }
 }, {strict: false});
 

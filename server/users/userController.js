@@ -80,7 +80,7 @@ module.exports = {
     var token = req.headers['x-access-token'];
     if (!token) {
       req.user = null;
-      nex();
+      next();
     } else {
       req.user = jwt.decode(token, 'route66');
       next()

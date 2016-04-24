@@ -6,8 +6,13 @@ var createJourney = Q.nbind(Journey.create, Journey);
 
 module.exports = {
   saveJourney: function (req, res) {
-    console.log(req.body.start);
-    Journey.findOne({start: req.body.start}, function (err, doc) {
+    var journey = req.body;
+    journey.user = req.user;
+    Journey.findOne({
+        $and: [{start: journey.start},
+               {end: journey.end}
+              ]},
+    function (err, doc) {
       if (err) {
         res.status(500).send('notok')
       }
@@ -17,7 +22,7 @@ module.exports = {
       } else {
         res.status(200).send(doc);
       }
-    })
+    });
   },
 
   getAll: function (req, res, next) {
