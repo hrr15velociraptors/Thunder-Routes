@@ -20,16 +20,14 @@ angular.module('app.services', [])
         $cordovaGeolocation.getCurrentPosition(options).then(function(position){
           //Creates Map based of geo position
           var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
           var mapOptions = {
             zoom: 15,
             center: latLng,
-            preserveViewport: true
+            preserveViewport: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
           };
           //Appends the map to the view
-          map = new google.maps.Map(document.getElementById('map'), mapOptions);
-          console.log(map.getCenter().lat())
-          // Set delegate for map
+          map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
           directionsDisplay.setMap(map);
           }, function(error){
           console.log("Could not get location");
@@ -76,16 +74,16 @@ angular.module('app.services', [])
                 // re-center map at start of trip
                 map.setZoom(12);
                 map.setCenter({lat:startLat,lng:startLng});
-                
+
                 // TODO: FULL TRIP DISPLAY
                 // // define fresh bounds
                 // var bounds = new google.maps.LatLngBounds();
-                
+
                 // // grow bounds from waypoints
                 // for (var i = 0; i < marks.length; i++) {
                 //   bounds.extend({lat:marks[i].lat,lng:marks[i].lng});
                 // }
-                
+
                 // // adjust map view to show trip
                 // map.setCenter(bounds.getCenter());
                 // map.fitBounds(bounds);
@@ -120,7 +118,7 @@ angular.module('app.services', [])
         // Puts the points on the google map
         directionsService.route(wyptRequest, function (response, status) {
           if (status === google.maps.DirectionsStatus.OK) {
-          
+
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
             sortWaypoints(response.routes[0].waypoint_order);

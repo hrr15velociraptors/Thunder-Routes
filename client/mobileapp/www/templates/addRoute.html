@@ -3,11 +3,11 @@
         <form class="list">
             <label class="item item-input" name="Start">
                 <span class="input-label">Start</span>
-                <input id='start' type="text" placeholder="" ng-model="startInput">
+                <input id='start' type="input" placeholder="" ng-model="startInput">
             </label>
             <label class="item item-input">
                 <span class="input-label">End</span>
-                <input id='end' type="text" placeholder="" ng-model="endInput">
+                <input id='end' type="input" placeholder="" ng-model="endInput">
             </label>
             <label class="item item-select" name="Stops">
                 <span class="input-label">Stops</span>
@@ -15,7 +15,7 @@
             </label>
         </form>
         <a id="addRoute-button13" class="button button-balanced button-large button-block" ng-click="getRoute()">Get Route</a>
-        
+
         <!-- Pitstops for new route -->
         <ion-list ng-if="places.length" class="info stop-info" ng-repeat="place in places | orderBy:'position'">
             <!-- <ion-item>Route A</ion-item> -->
