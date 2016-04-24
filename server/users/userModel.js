@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  
+
   password: {
     type: String,
     required: true
@@ -36,7 +36,7 @@ UserSchema.pre('save', function(next) {
   if(!user.isModified('password')) {
     return next();
   }
-  
+
   // generate a salt
   bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
     if(err) {

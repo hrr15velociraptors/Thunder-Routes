@@ -13,6 +13,8 @@ app.use(parser.json());
 app.use(morgan('dev'));
 app.use(cors());
 
+app.use(userController.addUserToReq);
+
 var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/roadtrippin';
 mongoose.connect(mongoUri);
 
