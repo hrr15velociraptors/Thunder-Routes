@@ -114,4 +114,4 @@ angular.module('app.controllers', ['app.services'])
 
 .controller('loginCtrl', function($scope) {
 
-})
+});

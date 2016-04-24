@@ -31,6 +31,7 @@ angular.module('app.services', [])
           directionsDisplay.setMap(map);
           }, function(error){
           console.log("Could not get location");
+          console.log(error);
         });
 
       };
