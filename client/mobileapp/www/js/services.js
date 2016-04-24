@@ -27,6 +27,8 @@ angular.module('app.services', [])
           };
           //Appends the map to the view
           map = new google.maps.Map(document.getElementById('map'), mapOptions);
+          console.log(map.getCenter().lat())
+          // Set delegate for map
           directionsDisplay.setMap(map);
           }, function(error){
           console.log("Could not get location");
@@ -58,6 +60,9 @@ angular.module('app.services', [])
             // grab official start and end points for later use
             var officialStart = result.routes[0].legs[0].start_address;
             var officialEnd = result.routes[0].legs[0].end_address;
+            var startLat = result.routes[0].legs[0].start_location.lat();
+            var startLng = result.routes[0].legs[0].start_location.lng();
+
             //format and send request for the same trip but with waypoints
             var stops = [];
             var waypoints = getWaypoints(result.routes[0].overview_path, numStops);
@@ -66,6 +71,9 @@ angular.module('app.services', [])
               googleMapService.render(officialStart, officialEnd, placePoints)
               .then(function () {
                 deferred.resolve(googleMapService.thisTrip.waypoints);
+              }).then(function() {
+                map.setZoom(15);
+                map.setCenter({lat:startLat,lng:startLng});
               });
             });
           }
@@ -97,6 +105,7 @@ angular.module('app.services', [])
         // Puts the points on the google map
         directionsService.route(wyptRequest, function (response, status) {
           if (status === google.maps.DirectionsStatus.OK) {
+          
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
             sortWaypoints(response.routes[0].waypoint_order);
