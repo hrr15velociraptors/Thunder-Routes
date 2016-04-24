@@ -9,7 +9,6 @@ angular.module('app.controllers', ['app.services'])
     $scope.route.stopOptions = [1, 2, 3, 4, 5];
     $scope.places = [];
     $scope.savedRoutes = [];
-    console.log(google.maps.places);
     var startAutoComplete = new google.maps.places.Autocomplete(
       document.getElementById('start'), {
       types: ['geocode']
@@ -18,9 +17,6 @@ angular.module('app.controllers', ['app.services'])
     startAutoComplete.addListener('place_changed', function() {
       $scope.route.start = startAutoComplete.getPlace().formatted_address;
         var place = startAutoComplete.getPlace();
-        console.log('place', place);
-        console.log($scope.route.start);
-        console.log($scope.route.end);
     });
 
     var endAutoComplete = new google.maps.places.Autocomplete(
