@@ -9,18 +9,7 @@ var JourneySchema = new mongoose.Schema({
   end: {
     type: String
   },
-  waypoints: {
-    type: [{
-      location: String,
-      name: String,
-      lat: Number,
-      lng: Number,
-      price_level: Number,
-      rating: Number,
-      showYelp: Boolean,
-      yelpData: {}
-    }]
-  },
+  waypoints: mongoose.Schema.Types.Mixed,
   hash: {
     type: String
   },
