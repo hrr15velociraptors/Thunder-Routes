@@ -1,5 +1,5 @@
 angular.module('roadtrippin.maps', ['gservice'])
-  .controller('mapController', function($scope, mapFactory, gservice, $location, $anchorScroll, $http) {
+  .controller('mapController', function($scope, mapFactory, gservice, $location, $anchorScroll, $http, $window) {
     $scope.route = {
       start: '',
       end: ''
@@ -71,6 +71,24 @@ angular.module('roadtrippin.maps', ['gservice'])
       mapFactory.getAllRoutes().then(function (results) {
         $scope.savedRoutes = results;
       });
+    };
+
+    $scope.generateLink = function (route) {
+      //http://google.com/maps/dir/los+angeles+ca/34.0108514,-118.16205460000003/irvine+ca
+      var waypointLinks = '';
+      for (var i = 0; i < route.waypointChoices.length; i++) {
+        waypointLinks += route.waypointChoices[i][0].lat + ',' + route.waypointChoices[i][0].lng + '/';
+      }
+      console.log(waypointLinks);
+      var link = 'http://google.com/maps/dir/'
+      + route.start.split(',')[0] + '/'
+      + waypointLinks
+      + route.end.split(',')[0];
+      console.log(route.start);
+      console.log(route.end);
+      console.log(route.waypointChoices);
+      console.log(link);
+      $window.open(link, '_blank');
     };
 
     $scope.viewSavedRoute = function (route) {
