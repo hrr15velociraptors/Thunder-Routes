@@ -44,7 +44,7 @@ angular.module('app.routes', [])
     controller: 'loginCtrl'
   })
 
-$urlRouterProvider.otherwise('/page6')
+$urlRouterProvider.otherwise('/page3')
 
 
 
