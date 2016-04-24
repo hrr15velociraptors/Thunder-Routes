@@ -20,18 +20,6 @@ module.exports = {
         res.status(200).send(doc);
       }
     })
-    // findJourney({waypoints: waypoints})
-    //   .then(function (waypoint) {
-    //     if (!waypoint) {
-    //       return createJourney(req.body);
-    //     } else {
-    //       next(new Error('Journey already exist!'));
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     console.log('error save journey', error);
-    //     next(error);
-    //   });
   },
 
   getAll: function (req, res, next) {
