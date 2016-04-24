@@ -191,7 +191,7 @@ angular.module('gservice', [])
             rating: choice.rating,
             des: choice.des,
             showYelp: false,
-            yelpData: fal se
+            yelpData: false
           };
           return dest;
         });
