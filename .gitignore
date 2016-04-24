@@ -11,3 +11,4 @@ client/lib
 client/mobileapp/node_modules/
 client/mobileapp/platforms/
 client/mobileapp/plugins/
+client/mobileapp/www/lib/google/
