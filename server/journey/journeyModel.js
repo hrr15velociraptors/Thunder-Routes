@@ -3,19 +3,28 @@ var crypto = require('crypto');
 var Q = require('q');
 
 var JourneySchema = new mongoose.Schema({
-  startPoint: {
+  start: {
     type: String
   },
-  endPoint: {
+  end: {
     type: String
   },
-  wayPoints: {
-    type: [String]
+  waypoints: {
+    type: [{
+      location: String,
+      name: String,
+      lat: Number,
+      lng: Number,
+      price_level: Number,
+      rating: Number,
+      showYelp: Boolean,
+      yelpData: {}
+    }]
   },
   hash: {
     type: String
   }
-});
+}, {strict: false});
 
 var createSha = function (points) {
   var shasum = crypto.createHash('sha1');
@@ -25,7 +34,7 @@ var createSha = function (points) {
 
 JourneySchema.pre('save', function(next) {
   var journey = this;
-  var hash = createSha(journey.wayPoints.length.toString() + journey.startPoint + journey.endPoint);
+  var hash = createSha(journey.waypoints.length.toString() + journey.start + journey.end);
   journey.hash = hash;
   next();
 });
