@@ -105,7 +105,7 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
     $scope.changeRoute = function (choice, $index) {
       gservice.thisTrip.waypoints[choice.position].topChoice = $index;
       gservice.render(gservice.thisTrip.start, gservice.thisTrip.end, gservice.thisTrip.waypoints)
-
+      $scope.places[choice.position] = choice;
     };
 
     $scope.signout = function () {
