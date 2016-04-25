@@ -1,6 +1,6 @@
 angular.module('roadtrippin.auth', [])
 
-.controller('authController', function($scope, $window, $location, authFactory) {
+.controller('authController', function($scope, $window, $state, authFactory) {
   $scope.user = {};
   $scope.loginError = false;
   $scope.errorMessage = '';
@@ -12,7 +12,8 @@ angular.module('roadtrippin.auth', [])
           if (token && typeof token !== 'object') {
             $scope.loginError = false;
             $window.localStorage.setItem('com.roadtrippin', token);
-            $location.path('/');
+            // $location.path('/');
+            $state.transitionTo('homepage')
           } else if (typeof token === 'object') {
             $scope.loginError = true;
             $scope.errorMessage = token.error;
@@ -31,7 +32,8 @@ angular.module('roadtrippin.auth', [])
           if (token && typeof token !== 'object') {
             $scope.loginError = false;
             $window.localStorage.setItem('com.roadtrippin', token);
-            $location.path('/');
+            // $location.path('/');
+            $state.transitionTo('homepage')
           } else if (typeof token === 'object') {
             $scope.loginError = true;
             $scope.errorMessage = token.error;
