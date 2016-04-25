@@ -43,7 +43,7 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
       $scope.allPlaces = gservice.thisTrip;
       places.forEach(function (nearPlaces) { //split address for easier formatting
         //first choice
-        place = nearPlaces[0];
+        place = nearPlaces[nearPlaces.topChoice];
         place.split_location = place.location.split(', ');
         $scope.places.push(place);
       });
@@ -90,7 +90,6 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
     $scope.getAll();
 
     $scope.getYelp = function (place, $index) {
-      console.log('asd');
       if (!$scope.places[$index].yelpData) {
         $http({
           method: 'POST',
@@ -101,6 +100,12 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
           $scope.places[$index].yelpData = res.data;
         });
       }
+    };
+
+    $scope.changeRoute = function (choice, $index) {
+      gservice.thisTrip.waypoints[choice.position].topChoice = $index;
+      gservice.render(gservice.thisTrip.start, gservice.thisTrip.end, gservice.thisTrip.waypoints)
+
     };
 
     $scope.signout = function () {
