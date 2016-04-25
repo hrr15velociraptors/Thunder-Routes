@@ -1,4 +1,4 @@
-angular.module('roadtrippin.maps', ['gservice', 'ui.bootstrap'])
+angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
   .controller('mapController', function($scope, mapFactory, gservice, $location, $anchorScroll, $http, $window) {
     $scope.route = {
       start: '',
@@ -90,6 +90,7 @@ angular.module('roadtrippin.maps', ['gservice', 'ui.bootstrap'])
     $scope.getAll();
 
     $scope.getYelp = function (place, $index) {
+      console.log('asd');
       if (!$scope.places[$index].yelpData) {
         $http({
           method: 'POST',
