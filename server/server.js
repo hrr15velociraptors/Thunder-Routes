@@ -9,10 +9,10 @@ var cors = require('cors');
 var app = express();
 
 app.use(express.static(__dirname + '/../client/webapp'));
+parser.urlencoded({ extended: false })
 app.use(parser.json({limit: '50mb'}));
 app.use(morgan('dev'));
 app.use(cors());
-
 app.use(userController.addUserToReq);
 
 var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/roadtrippin';
@@ -25,6 +25,7 @@ db.once('open', function() {
 });
 
 app.post('/api/yelp', yelp.getDestData);
+app.delete('/api/journey/:id', journeyController.deleteJourney);
 app.post('/api/journey', journeyController.saveJourney);
 app.get('/api/journey', journeyController.getAll);
 app.post('/signin', userController.signin);

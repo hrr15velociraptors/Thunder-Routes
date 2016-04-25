@@ -39,5 +39,14 @@ module.exports = {
       .catch(function(error) {
         next(error);
       });
+  },
+
+  deleteJourney: function (req, res) {
+    Journey.find({_id: req.params.id}).remove(function (err, doc) {
+      if (err) {
+        res.json(err);
+      }
+      res.send('ok');
+    });
   }
 };

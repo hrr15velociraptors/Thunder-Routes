@@ -18,6 +18,13 @@ angular.module('roadtrippin.mapsFactory', [])
       return deferred.promise;
     };
 
+    var deleteJourney = function (journeyId) {
+      return $http({
+        method: 'DELETE',
+        url: '/api/journey/' + journeyId
+      })
+    };
+
     var getAllRoutes = function() {
       var deferred = $q.defer();
       $http({
@@ -38,6 +45,7 @@ angular.module('roadtrippin.mapsFactory', [])
 
     return {
       saveJourneyWithWaypoints: saveJourneyWithWaypoints,
+      deleteJourney: deleteJourney,
       getAllRoutes: getAllRoutes,
       signout: signout
     };

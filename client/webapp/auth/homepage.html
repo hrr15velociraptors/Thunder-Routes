@@ -91,11 +91,14 @@
       <!-- <div class="stop-count">Number of stops: <br /> {{ route.wayPoints.length/2 }}</div> -->
       <div class="stop-count">{{route.waypoints.length}} stop<span ng-if="route.waypoints.length > 2">s</span></div>
     </div>
-    <div class="col-xs-3 centered">
+    <div class="col-xs-2 centered">
       <button class="saved-route-link btn" ng-click="generateLink(route)">Get Directions</button>
     </div>
-    <div class="col-xs-3 centered">
+    <div class="col-xs-2 centered">
       <button class="saved-route-link btn" ng-click="viewSavedRoute(route)">View this Route</button>
+    </div>
+    <div class="col-xs-2 centered">
+      <button class="saved-route-link btn btn-danger" ng-click="deleteJourney(route._id)">X</button>
     </div>
   </div>
 </div>

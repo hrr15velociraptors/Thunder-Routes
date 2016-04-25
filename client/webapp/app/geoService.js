@@ -92,6 +92,7 @@ angular.module('gservice', [])
         };
         directionsService.route(wyptRequest, function (response, status) {
           if (status === google.maps.DirectionsStatus.OK) {
+            console.log(response.routes[0].legs);
             // googleMapService.thisTrip.legs = response.routes[0].legs;
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
