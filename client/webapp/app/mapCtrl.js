@@ -43,7 +43,7 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
       $scope.allPlaces = gservice.thisTrip;
       places.forEach(function (nearPlaces) { //split address for easier formatting
         //first choice
-        place = nearPlaces[nearPlaces.topChoice];
+        place = nearPlaces.choices[nearPlaces.topChoice];
         place.split_location = place.location.split(', ');
         $scope.places.push(place);
       });
