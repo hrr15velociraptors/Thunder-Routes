@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Find the best routes and attractions",
   "main": "server/server.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node server/index.js",
+    "postinstall": "bower install"
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anatomij/Thunderroutes.git"
@@ -13,6 +16,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
+    "bower": "^1.7.9",
     "cors": "^2.7.1",
     "crypto": "0.0.3",
     "express": "^4.13.4",
