@@ -9,7 +9,7 @@ var cors = require('cors');
 var app = express();
 
 app.use(express.static(__dirname + '/../client/webapp'));
-app.use(parser.json());
+app.use(parser.json({limit: '50mb'}));
 app.use(morgan('dev'));
 app.use(cors());
 
