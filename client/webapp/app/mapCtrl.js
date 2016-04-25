@@ -1,4 +1,4 @@
-angular.module('roadtrippin.maps', ['gservice'])
+angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
   .controller('mapController', function($scope, mapFactory, gservice, $location, $anchorScroll, $http, $window) {
     $scope.route = {
       start: '',
@@ -32,8 +32,6 @@ angular.module('roadtrippin.maps', ['gservice'])
     $scope.getRoute = function() {
       gservice.calcRoute($scope.route.start, $scope.route.end, $scope.route.numStops)
         .then(function(places) {
-          //first 5 choices at every wp
-          $scope.allPlaces = places;
           splitLocations(places);
         });
         $scope.startInput = '';
@@ -42,13 +40,11 @@ angular.module('roadtrippin.maps', ['gservice'])
 
     var splitLocations = function (places) {
       $scope.places = [];
-
+      $scope.allPlaces = gservice.thisTrip;
       places.forEach(function (nearPlaces) { //split address for easier formatting
         //first choice
-        place = nearPlaces[0];
-        if (!Array.isArray(place.location)) {
-          place.location = place.location.split(', ');
-        }
+        place = nearPlaces[nearPlaces.topChoice];
+        place.split_location = place.location.split(', ');
         $scope.places.push(place);
       });
     };
@@ -84,6 +80,7 @@ angular.module('roadtrippin.maps', ['gservice'])
     };
 
     $scope.viewSavedRoute = function (route) {
+      $scope.allPlaces = route;
       $location.hash('top');
       $anchorScroll();
       gservice.render(route.start, route.end, route.waypoints)
@@ -103,6 +100,12 @@ angular.module('roadtrippin.maps', ['gservice'])
           $scope.places[$index].yelpData = res.data;
         });
       }
+    };
+
+    $scope.changeRoute = function (choice, $index) {
+      gservice.thisTrip.waypoints[choice.position].topChoice = $index;
+      gservice.render(gservice.thisTrip.start, gservice.thisTrip.end, gservice.thisTrip.waypoints)
+
     };
 
     $scope.signout = function () {

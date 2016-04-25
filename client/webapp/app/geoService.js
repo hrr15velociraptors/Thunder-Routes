@@ -57,7 +57,7 @@ angular.module('gservice', [])
             var waypoints = getWaypoints(result.routes[0].overview_path, numStops);
             var promise = getNearbyThings(waypoints); //testing testing
             promise.then(function (placePoints) {
-              // var placePoints = placePoints.map(function (pl) {return pl[0]});
+              // var placePoints = placePoints.map(function (pl) {return pl[0]});\
               googleMapService.render(officialStart, officialEnd, placePoints)
               .then(function () {
                 deferred.resolve(googleMapService.thisTrip.waypoints);
@@ -78,7 +78,7 @@ angular.module('gservice', [])
         var stops = []; //format stops for Google request
         waypoints.forEach(function (w) {
           stops.push({
-            location: w[0].location.join(' '),
+            location: w[w.topChoice].location,
             stopover: true
           });
         });
@@ -163,7 +163,7 @@ angular.module('gservice', [])
           } if (choice.rating < 2 || choice.rating === undefined) {
             choice.des = 0;
           } else {
-            choice.des = choice.rating / choice.price_level;
+            choice.des = choice.rating * choice.price_level;
           }
           var dest = {location: choice.formatted_address,
             name: choice.name,
@@ -182,7 +182,10 @@ angular.module('gservice', [])
           return b.des - a.des;
         });
 
-        return choices.slice(0, 5);
+        var out = choices.slice(0, 5);
+        out.topChoice = 0
+
+        return out;
       };
 
       //Record order in 'position' property of each waypoint
