@@ -50,15 +50,25 @@
           <div>
             <uib-tabset active="active">
               <uib-tab class="infoTab" index="0" heading="Info">
-                <p><img ng-src="{{place.yelpData.image_url}}"></p>
+                <div class="media">
+                  <a class="pull-left" ng-href="{{place.yelpData.url}}">
+                    <img ng-src="{{place.yelpData.image_url}}">
+                    <p><img ng-src="{{place.yelpData.rating_img_url_small}}"></p>
+                  </a>
+                  <div class="media-body">
+                    <p>Phone: {{place.yelpData.phone}}</p>
+                    <p>{{place.yelpData.snippet_text}}</p>
+                    <p><a ng-href="{{place.yelpData.url}}" target="_blank">Yelp Url</a></p>
+                  </div>
+                </div>
+<!--                 <p><img ng-src="{{place.yelpData.image_url}}"></p>
                 <p><img ng-src="{{place.yelpData.rating_img_url_small}}"></p>
                 <p>Phone: {{place.yelpData.phone}}</p>
-                <p>{{place.yelpData.snippet_text}}</p>
-                <p><a ng-href="{{place.yelpData.url}}" target="_blank">Yelp Url</a></p>
+                <p>{{place.yelpData.snippet_text}}</p> -->
               </uib-tab>
               <uib-tab class="infoTab" index="1" heading="Other Choices">
                 <div ng-repeat="choice in allPlaces.waypoints[$index]">
-                  {{choice.name}}
+                  {{choice.name}},{{choice.rating}}/5.0,{{choice.price_level}}
                 </div>
               </uib-tab>
             </uib-tabset>
