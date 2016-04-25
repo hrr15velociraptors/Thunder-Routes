@@ -55,6 +55,7 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
 
     $scope.saveRoute = function () {
       mapFactory.saveJourneyWithWaypoints(gservice.thisTrip).then($scope.getAll());
+      $scope.getAll();
     };
 
     $scope.getAll = function () {
