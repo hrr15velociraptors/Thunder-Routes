@@ -78,7 +78,7 @@ angular.module('gservice', [])
         var stops = []; //format stops for Google request
         waypoints.forEach(function (w) {
           stops.push({
-            location: w[w.topChoice].location,
+            location: w.choices[w.topChoice].location,
             stopover: true
           });
         });
@@ -182,8 +182,7 @@ angular.module('gservice', [])
           return b.des - a.des;
         });
 
-        var out = choices.slice(0, 5);
-        out.topChoice = 0
+        var out = {topChoice: 0, choices: choices.slice(0, 5)};
 
         return out;
       };
@@ -191,14 +190,14 @@ angular.module('gservice', [])
       //Record order in 'position' property of each waypoint
       var sortWaypoints = function (waypointOrder) {
         for (var i = 0; i < googleMapService.thisTrip.waypoints.length; i++) {
-          var waypointChoices = googleMapService.thisTrip.waypoints[i];
+          var waypointChoices = googleMapService.thisTrip.waypoints[i].choices;
           for (var j = 0; j < 5; j++) {
             var position = waypointOrder[i];
             waypointChoices[j].position = position;
           }
         }
         googleMapService.thisTrip.waypoints = googleMapService.thisTrip.waypoints.sort(function (a, b) {
-          return a[0].position - b[0].position;
+          return a.choices[0].position - b.choices[0].position;
         });
       };
 
