@@ -9,7 +9,6 @@ module.exports = {
   signin: function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    console.log(req.user);
     findUser({username: username})
       .then(function(user) {
         if (!user) {

@@ -8,6 +8,8 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
     $scope.places = [];
     $scope.savedRoutes = [];
 
+    gservice.refresh();
+
     var startAutoComplete = new google.maps.places.Autocomplete(
       document.getElementById('start'), {
       types: ['geocode']
@@ -54,8 +56,9 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
     };
 
     $scope.saveRoute = function () {
-      mapFactory.saveJourneyWithWaypoints(gservice.thisTrip).then($scope.getAll());
-      $scope.getAll();
+      mapFactory.saveJourneyWithWaypoints(gservice.thisTrip).then(function() {
+        $scope.getAll();
+      });
     };
 
     $scope.getAll = function () {
@@ -89,6 +92,13 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
     };
 
     $scope.getAll();
+
+    $scope.deleteJourney = function (journeyId) {
+      mapFactory.deleteJourney(journeyId).then(function (res) {
+        // console.log(res);
+        $scope.getAll();
+      })
+    }
 
     $scope.getYelp = function (place, $index) {
       if (!$scope.places[$index].yelpData) {
