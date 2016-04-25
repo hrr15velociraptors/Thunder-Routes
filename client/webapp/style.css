@@ -180,16 +180,11 @@ h3 {
   visibility: hidden;
 }
 
-.glyphicon-resize-small, .glyphicon-resize-full
-{
-  top: 20px;
-  font-size: 1.8em;
-  text-align: right;
+.infoTab {
+  margin-top: 10px;
 }
 
-/*.infoTab {
-  font: 1.0em "Fugaz One";
-  color: #FFF;
-  padding: 10px 0;
-  background-color: #003136;
-}*/
+.yelpInfo {
+  margin-bottom: 70px;
+}
+
