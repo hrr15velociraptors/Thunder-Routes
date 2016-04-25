@@ -52,6 +52,7 @@ angular.module('gservice', [])
             // grab official start and end points for later use
             var officialStart = result.routes[0].legs[0].start_address;
             var officialEnd = result.routes[0].legs[0].end_address;
+
             //format and send request for the same trip but with waypoints
             var stops = [];
             var waypoints = getWaypoints(result.routes[0].overview_path, numStops);
@@ -91,6 +92,7 @@ angular.module('gservice', [])
         };
         directionsService.route(wyptRequest, function (response, status) {
           if (status === google.maps.DirectionsStatus.OK) {
+            googleMapService.thisTrip.legs = response.routes[0].legs;
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
             sortWaypoints(response.routes[0].waypoint_order);

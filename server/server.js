@@ -25,8 +25,8 @@ db.once('open', function() {
 });
 
 app.post('/api/yelp', yelp.getDestData);
-app.post('/saveJourney', journeyController.saveJourney);
-app.get('/saveJourney', journeyController.getAll);
+app.post('/api/journey', journeyController.saveJourney);
+app.get('/api/journey', journeyController.getAll);
 app.post('/signin', userController.signin);
 app.post('/signup', userController.signup);
 app.use(userController.errorHandler);

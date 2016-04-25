@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var Q = require('q');
+var relationship = require("mongoose-relationship");
 
 var JourneySchema = new mongoose.Schema({
   start: {
@@ -14,9 +15,13 @@ var JourneySchema = new mongoose.Schema({
     type: String
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    childPath: "journeys"
   }
 }, {strict: false});
+
+JourneySchema.plugin(relationship, {relationshipPathName: "user"});
 
 var createSha = function (points) {
   var shasum = crypto.createHash('sha1');
