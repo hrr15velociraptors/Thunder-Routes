@@ -8,6 +8,8 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
     $scope.places = [];
     $scope.savedRoutes = [];
 
+    gservice.refresh();
+
     var startAutoComplete = new google.maps.places.Autocomplete(
       document.getElementById('start'), {
       types: ['geocode']
