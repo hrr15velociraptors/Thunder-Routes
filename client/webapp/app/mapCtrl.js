@@ -67,9 +67,9 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
 
       //looks through all lat and lng and makes a google maps link
       var waypointLinks = '';
-      for (var i = 0; i < route.waypoints.length; i++) {
-        waypointLinks += route.waypoints[i][0].lat + ',' + route.waypoints[i][0].lng + '/';
-      }
+      route.waypoints.forEach(function (stop) {
+        waypointLinks += stop.choices[stop.topChoice].lat + ',' + stop.choices[stop.topChoice].lng + '/';
+      });
       var link = 'http://google.com/maps/dir/'
       + route.start.split(',')[0] + '/'
       + waypointLinks
