@@ -30,7 +30,9 @@ module.exports = {
   },
 
   getAll: function (req, res, next) {
-    Journey.find({})
+    Journey.find({_id: {
+      $in: req.user.journeys
+    }})
       .then(function (data) {
         res.status(200).send(data);
       })

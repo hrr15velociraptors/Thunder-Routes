@@ -82,8 +82,14 @@ module.exports = {
       req.user = null;
       next();
     } else {
-      req.user = jwt.decode(token, 'route66');
-      next()
+      var token = jwt.decode(token, 'route66');
+      User.findOne({username: token.username}, function (err, user) {
+        if (err) {
+          next(err);
+        }
+        req.user = user;
+        next()
+      })
     }
   },
 
