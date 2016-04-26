@@ -233,6 +233,7 @@ angular.module('app.services', [])
      return deferred.promise;
    };
 
+
    var signout = function() {
      $window.localStorage.removeItem('com.roadtrippin');
      $location.path('/signin');
