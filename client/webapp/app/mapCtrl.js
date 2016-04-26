@@ -1,5 +1,19 @@
 angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
   .controller('mapController', function($scope, mapFactory, gservice, $location, $anchorScroll, $http, $window) {
+    $scope.categories = [
+          ["Restaurants", "restaurant"],
+          ["Night Clubs", "night_club"],
+          ["Casinos", "casino"],
+          ["Hospitals", "hospital"]
+    ];
+
+    $scope.chosenCat = "";
+
+    $scope.changeCat = function(cat) {
+      $scope.chosenCat = cat;
+    };
+
+
     $scope.route = {
       start: '',
       end: ''
@@ -32,7 +46,7 @@ angular.module('roadtrippin.maps', ['gservice', 'ngAnimate', 'ui.bootstrap'])
 
     //this is a call to our Google maps API factory for directions
     $scope.getRoute = function() {
-      gservice.calcRoute($scope.route.start, $scope.route.end, $scope.route.numStops)
+      gservice.calcRoute($scope.route.start, $scope.route.end, $scope.route.numStops, $scope.chosenCat)
         .then(function(places) {
           splitLocations(places);
         });
