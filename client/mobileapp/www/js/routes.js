@@ -32,15 +32,36 @@ angular.module('app.routes', [])
   .state('signup', {
     url: '/page5',
     templateUrl: 'templates/signup.html',
-    controller: 'signupCtrl'
+    controller: 'authController'
   })
 
   .state('login', {
     url: '/page6',
     templateUrl: 'templates/login.html',
-    controller: 'loginCtrl'
+    controller: 'authController'
   });
 
-$urlRouterProvider.otherwise('/page3');
-
+$httpProvider.interceptors.push('AttachTokens');
+})
+.factory('AttachTokens', function ($window) {
+  var attach = {
+    request: function (object) {
+      var jwt = $window.localStorage.getItem('com.roadtrippin');
+      if (jwt) {
+        object.headers['x-access-token'] = jwt;
+      }
+      object.headers['Allow-Control-Allow-Origin'] = '*';
+      return object;
+    }
+  };
+  return attach;
+})
+.run(function ($rootScope, $location, authFactory, $state) {
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
+    if (toState && toState.authenticate && !authFactory.isAuth()) {
+      $location.url('/signin');
+    } else if (toState && toState.authenticate && authFactory.isAuth()) {
+      $location.url('/homepage');
+    }
+  });
 });
