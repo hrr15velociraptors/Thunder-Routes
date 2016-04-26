@@ -1,7 +1,8 @@
 angular.module('app.routes', [])
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
+  $urlRouterProvider.otherwise('/page6');
   $stateProvider
 
   .state('addRoute', {

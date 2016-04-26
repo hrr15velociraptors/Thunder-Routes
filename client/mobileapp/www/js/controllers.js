@@ -97,12 +97,8 @@ angular.module('app.controllers', ['app.services'])
         }
       }
     };
-
     $scope.getAll();
 
-    $scope.signout = function () {
-      mapFactory.signout();
-    };
 })
 .controller('allRoutesCtrl', function($scope) {
 
