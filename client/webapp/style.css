@@ -40,7 +40,7 @@ h1 {
   float: right;
 }
 
-.dropdown-toggle {
+.dropdown-toggle1 {
   background: rgba(0,0,0,0);
   color: white;
   outline: none;
@@ -188,3 +188,9 @@ h3 {
   margin-bottom: 70px;
 }
 
+button#singlebutton {
+  margin-top: 0px;
+  left: 0%;
+  background-color: #003136;
+  border-color: #003136;
+}

@@ -40,7 +40,7 @@ angular.module('gservice', [])
       // --------------------------------------------------------------
 
       //calculate a route (promisified function)
-      googleMapService.calcRoute = function (start, end, numStops) {
+      googleMapService.calcRoute = function (start, end, numStops, type) {
         var deferred = $q.defer();
         var request = {
           origin: start,
@@ -56,7 +56,7 @@ angular.module('gservice', [])
             //format and send request for the same trip but with waypoints
             var stops = [];
             var waypoints = getWaypoints(result.routes[0].overview_path, numStops);
-            var promise = getNearbyThings(waypoints); //testing testing
+            var promise = getNearbyThings(waypoints, type); //testing testing
             promise.then(function (placePoints) {
               // var placePoints = placePoints.map(function (pl) {return pl[0]});\
               googleMapService.render(officialStart, officialEnd, placePoints)
@@ -126,7 +126,7 @@ angular.module('gservice', [])
       };
 
       //get a single nearby attraction for each waypoint (promisified function)
-      var getNearbyThings = function (waypointArray, distance, type) {
+      var getNearbyThings = function (waypointArray, type) {
         var deferred = $q.defer();
         var placesToStop = [];
         //build out an array of requests
@@ -134,7 +134,7 @@ angular.module('gservice', [])
         waypointArray.forEach(function (w) {
           placeRequests.push({
             location: new google.maps.LatLng(w.lat, w.lng),
-            radius: distance || '500',
+            radius: '500',
             query: type || 'restaurant'
           });
         });
